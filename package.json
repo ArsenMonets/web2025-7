@@ -15,13 +15,15 @@
   "type": "commonjs",
   "main": "main.js",
   "scripts": {
-      "start": "npx nodemon main.js"
+    "start": "npx nodemon main.js"
   },
   "dependencies": {
-    "commander": "^13.1.0",
+    "body-parser": "^2.2.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "pg-promise": "^11.13.0"
+    "pg-promise": "^11.13.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

@@ -5,8 +5,8 @@ services:
     build: .
     container_name: node_dev_server
     volumes:
-      - ./:/usr/src/app/  
-      - /usr/src/app/node_modules  
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
     env_file:
       - .env
     ports:
