@@ -1,0 +1,29 @@
+{
+  "name": "web2025-7",
+  "version": "1.0.0",
+  "description": "A simple web server with db and docker",
+  "homepage": "https://github.com/ArsenMonets/web2025-7#readme",
+  "bugs": {
+    "url": "https://github.com/ArsenMonets/web2025-7/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArsenMonets/web2025-7.git"
+  },
+  "license": "ISC",
+  "author": "Arsen Monets",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pg-promise": "^11.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
