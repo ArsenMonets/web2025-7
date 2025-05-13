@@ -7,6 +7,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 
 const app = express();
 const port = process.env.PORT || 3000;  // Ensure fallback to 3000
+const host = process.env.HOST;
 
 const dbConfig = {
     host: process.env.DB_HOST,
@@ -330,9 +331,7 @@ app.use((err, req, res, next) => {
     console.error('Unhandled error:', err);
     res.status(500).json({ message: 'Server error' });
  });
-  
 
-// Запуск сервера
-app.listen(port, () => {
-    console.log("Server running on http://localhost:${port}");
-});
+ app.listen(port, () => {
+     console.log(`Server running on http://${host}:${port}`);
+ });
