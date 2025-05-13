@@ -1,19 +1,23 @@
+version: "3.8"
+
 services:
   server:
     build: .
     container_name: node_dev_server
     volumes:
-      - ./:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./:/usr/src/app/  
+      - /usr/src/app/node_modules  
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=admin
-      - DB_PASSWORD=secret
-      - DB_NAME=mydb
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - PORT=${PORT}
     depends_on:
       - db
     restart: unless-stopped
@@ -22,9 +26,9 @@ services:
     image: postgres:13
     container_name: postgres_db
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: mydb
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     ports:

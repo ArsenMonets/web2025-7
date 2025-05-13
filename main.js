@@ -1,21 +1,21 @@
 const express = require('express');
-const db = require('pg-promise')(); // Імпортуємо pg-promise
-const app = express();
+const db = require('pg-promise')();
+require('dotenv').config(); // Завантажуємо налаштування з .env
 
-const PORT = process.env.PORT || 3000;
+const app = express();
+const PORT = process.env.PORT;
 
 // Налаштування підключення до БД через pg-promise
 const dbConnection = db({
-  host: process.env.DB_HOST || 'db',
-  port: process.env.DB_PORT || 5432,
-  user: process.env.DB_USER || 'admin',
-  password: process.env.DB_PASSWORD || 'secret',
-  database: process.env.DB_NAME || 'mydb',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 app.get('/', async (req, res) => {
   try {
-    // Виконуємо SQL-запит через pg-promise
     const users = await dbConnection.any('SELECT * FROM users');
     res.json(users); // Повертаємо список користувачів
   } catch (err) {
