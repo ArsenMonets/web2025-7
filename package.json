@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "main.js",
   "scripts": {
-    "start": "npx nodemon main.js"
+    "start": "npx nodemon -L --inspect=0.0.0.0 main.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",

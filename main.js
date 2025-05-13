@@ -226,6 +226,97 @@ app.get('/devices/:serial_number', async (req, res) => {
     }
 });
 
+// DELETE /devices/:serial_number - видалення пристрою
+/**
+ * @swagger
+ * /devices/{serial_number}:
+ *   delete:
+ *     description: Delete a device by serial number
+ *     parameters:
+ *       - name: serial_number
+ *         in: path
+ *         required: true
+ *         description: The serial number of the device to delete
+ *     responses:
+ *       200:
+ *         description: Device deleted successfully
+ *       404:
+ *         description: Device not found
+ *       500:
+ *         description: Server error
+ */
+app.delete('/devices/:serial_number', async (req, res) => {
+    const { serial_number } = req.params;
+
+    try {
+        // Check if the device exists
+        const device = await database.oneOrNone('SELECT * FROM devices WHERE serial_number = $1', [serial_number]);
+
+        if (!device) {
+            return res.status(404).json({ message: 'Device not found' });
+        }
+
+        // Delete the device
+        await database.none('DELETE FROM devices WHERE serial_number = $1', [serial_number]);
+
+        res.status(200).json({ message: 'Device deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// DELETE /release/:serial_number - звільнення пристрою (видалення користувача)
+ /**
+ * @swagger
+ * /release/{serial_number}:
+ *   delete:
+ *     description: Release a device (remove assigned user)
+ *     parameters:
+ *       - name: serial_number
+ *         in: path
+ *         required: true
+ *         description: The serial number of the device to be released
+ *     responses:
+ *       200:
+ *         description: Device released successfully
+ *       404:
+ *         description: Device not found
+ *       400:
+ *         description: Device not assigned to any user
+ *       500:
+ *         description: Server error
+ */
+ app.delete('/release/:serial_number', async (req, res) => {
+    const { serial_number } = req.params; // Get serial_number from the URL path
+
+    try {
+        const device = await database.oneOrNone('SELECT * FROM devices WHERE serial_number = $1', [serial_number]);
+
+        if (!device) {
+            return res.status(404).json({ message: 'Device not found' });
+        }
+
+        // If the device is not assigned to any user
+        if (!device.user_name) {
+            return res.status(400).json({ message: 'Device is not assigned to any user' });
+        }
+
+        // Remove the user from the device (release it)
+        const updatedDevice = await database.one(
+            'UPDATE devices SET user_name = NULL WHERE serial_number = $1 RETURNING device_name, serial_number, user_name',
+            [serial_number]
+        );
+
+        res.status(200).json({ message: 'Device released successfully', device: updatedDevice });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+
 // 404 handler
 app.use((req, res) => {
     res.status(404).send('Not found');
