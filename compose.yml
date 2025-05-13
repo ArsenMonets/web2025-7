@@ -1,0 +1,12 @@
+services:
+  server:
+    build: .
+    container_name: node_dev_server
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
