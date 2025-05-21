@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "36677cac-63d5-4e19-b648-e234d553620c",
+		"name": "lab7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "44717293",
+		"_collection_link": "https://arsen-5137145.postman.co/workspace/Arsen's-Workspace~fdef0cfb-e8dd-4d33-85d7-cbefd0e0144c/collection/44717293-36677cac-63d5-4e19-b648-e234d553620c?action=share&source=collection_link&creator=44717293"
+	},
+	"item": [
+		{
+			"name": "Create a device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"device_name\": \"phone\",\n    \"serial_number\": \"15673\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"register"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a device 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"device_name\": \"computer\",\n    \"serial_number\": \"34124\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/register"
+			},
+			"response": []
+		},
+		{
+			"name": "No data create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "http://localhost:3000/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Get devices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/devices"
+			},
+			"response": []
+		},
+		{
+			"name": "Take a device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_name\": \"Arsen\",\n    \"serial_number\": \"15673\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/take"
+			},
+			"response": []
+		},
+		{
+			"name": "No data take",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": "http://localhost:3000/take"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a device",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/devices/15673"
+			},
+			"response": []
+		},
+		{
+			"name": "No device",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/devices/1567323"
+			},
+			"response": []
+		},
+		{
+			"name": "Tricky encoding",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/devices/15673%2"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a device",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/devices/15673"
+			},
+			"response": []
+		},
+		{
+			"name": "Release a device",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/release/15673"
+			},
+			"response": []
+		},
+		{
+			"name": "No device to release",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/release/156734"
+			},
+			"response": []
+		}
+	]
+}
